@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Themes
+{% endblock %}
+
+{% block content %}
+  <h1>Themes</h1>
+  <ul>
+    {% for object in object_list %}
+      <li><a href="{% url 'themes:detail' object.pk %}">{{ object.text|truncatechars:30 }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
