@@ -1,4 +1,5 @@
 *.pyc
 db.sqlite3
 *.log
-
+node_modules
+media
