@@ -16,14 +16,12 @@ sub.subscribe('chat');
 
 //Configure socket.io to store cookie set by Django
 io.use((socket, next) => {
-  socket.handshake.cookie = cookie_reader.parse(socket.handshake.headers.cookie);
-    if(socket.handshake.cookie['sessionid']) {
-      next()
-    }
-    else {
-      next(new Error("not valid token"));
-      socket.disconnect();
-    }
+  socket.handshake.cookie = socket.handshake.headers.cookie
+    ? cookie_reader.parse(socket.handshake.headers.cookie) : {};
+  if(socket.handshake.cookie.sessionid) {
+    return next()
+  }
+  next(new Error("not valid token"));
 });
 
 //Configure socket.io to store cookie set by Django
