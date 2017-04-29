@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from core.models import Comment
 from themes.models import Theme
-from django.contrib.auth.models import User
+from users.models import User
 
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseServerError
