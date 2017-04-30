@@ -2,6 +2,8 @@
 
 {% load staticfiles %}
 
+{% load mention %}
+
 {% block title %}
   {{ object.text|truncatechars:30 }}
 {% endblock %}
@@ -55,7 +57,7 @@
               <strong><a href="{% url 'users:detail' comment.user.username %}">{{ comment.user }}</a></strong>
             </p>
             <p class="comment-text">
-              {{ comment.text }}
+              {{ comment.text|mention|safe|urlize }}
             </p>
             <p class="date comment-created">
               {{ comment.created_at }}
@@ -116,7 +118,7 @@ $(document).ready(() => {
   function receive_message(message) {
     $('#comments').prepend(`<article class="comment">
       <p class="username">
-        <strong>${message.user}</strong>
+        <strong><a href="/@${message.user}">${message.user}</a></strong>
       </p>
       <p class="comment-text">
         ${message.text}
