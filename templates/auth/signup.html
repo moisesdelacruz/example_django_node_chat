@@ -11,7 +11,7 @@
 {% block content %}
 <div class="login">
   <section class="Box">
-    <h2 class="title">Profile Edit</h2>
+    <h2 class="title">Register</h2>
     <div class="box-content">
       <form class="form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -19,7 +19,10 @@
           {{ field }}
           {{ field.errors }}
         {% endfor %}
-        <button type="submit" class="btn btn-send">Save Changes</button>
+        <button type="submit" class="btn btn-send">Sign Up</button>
+        <p>
+          if already has a account, <a href="{% url 'auth:login' %}">Login</a>
+        </p>
       </form>
     </div>
   </section>

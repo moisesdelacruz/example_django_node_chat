@@ -14,6 +14,9 @@
         <input type="text" name="username" placeholder="Username" />
         <input type="password" name="password" placeholder="Password" />
         <button type="submit" class="btn btn-send">Login</button>
+        <p>
+          if not has a account, <a href="{% url 'auth:signup' %}">sign up</a>
+        </p>
       </form>
     </div>
   </section>

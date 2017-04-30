@@ -11,7 +11,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormVi
 from users.models import User
 from publishings.models import Publishing
 # forms
-from users.forms import UserCreateForm, UserUpdateForm
+from users.forms import UserUpdateForm
 
 # Create your views here.
 
@@ -29,14 +29,6 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         context = super(UserDetailView, self).get_context_data(**kwargs)
         context['publishings'] = Publishing.objects.filter(user=self.object.pk)
         return context
-
-# user register
-class UserCreateView(CreateView):
-    model = User
-    form_class = UserCreateForm
-
-    def get_success_url(self):
-        return reverse_lazy('users:profile')
 
 # private profile
 class ProfileTemplateView(LoginRequiredMixin, TemplateView):
