@@ -31,6 +31,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
     email = models.EmailField(_('email address'), blank=True)
+    birthday = models.DateField(_('birthday'), blank=True, null=True)
     photo = models.ImageField(blank=True, upload_to=content_file_name)
     is_staff = models.BooleanField(
         _('staff status'),
@@ -95,10 +96,11 @@ class User(AbstractUser):
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'
 
-    def save(self, *args, **kwargs):
-        try:
-            model = User.objects.get(id=self.id)
-            if self.photo:
-                model.photo.delete()
-        except: pass
-        super(User, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     try:
+    #         model = User.objects.get(id=self.id)
+    #         if self.photo:
+    #             print self.photo
+    #             model.photo.delete()
+    #     except: pass
+    #     return super(User, self).save(*args, **kwargs)

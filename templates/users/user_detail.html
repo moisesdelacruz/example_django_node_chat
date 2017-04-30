@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+  {% if object.get_full_name %}
+    {{ object.get_full_name|title }}
+  {% else %}
+    {{ object.username }}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<h2 class="title hide-mobile">
+  {% if object.get_full_name %}
+    {{ object.get_full_name|title }}
+  {% else %}
+    {{ object.username }}
+  {% endif %}
+</h2>
+<div class="content-flex box-shadow">
+  <section class="colum-2 border-right border-bottom">
+    <h2 class="title center-text">Profile</h2>
+    <figure class="border-dashed">
+      {% if object.photo %}
+        <span class="photo photo-median center" style="background-image: url({{ object.photo.url }})"></span>
+      {% else %}
+        <span class="photo photo-median center" style="background-image: url({% static "image/profile.jpg" %})"></span>
+      {% endif %}
+      {% if request.user == object %}
+        <figcaption class="center-text"><a href="{% url 'users:profile_edit' %}">Edit Profile</a></figcaption>
+      {% endif %}
+    </figure>
+    <div class="data">
+      <p>
+        <span class="label">first name:</span> {{ object.first_name|title }}
+      </p>
+      <p>
+        <span class="label">last name:</span> {{ object.last_name|title }}
+      </p>
+      <p>
+        <span class="label">email:</span> {{ object.email }}
+      </p>
+      <p>
+        <span class="label">Birthday:</span> {% if object.birthday %}{{ object.birthday }}{% endif %}
+      </p>
+    </div>
+  </section>
+  <section class="colum-2">
+    <h2 class="title center-text">Themes</h2>
+    <section class="cards">
+      {% for theme in themes %}
+        <article class="card box-shadow">
+          <div class="options">
+            <a href="{% url 'themes:detail' theme.pk %}"><i class="material-icons">visibility</i></a>
+            {% if request.user == object %}
+              <a href="#edit"><i class="material-icons">edit</i></a>
+              <a href="#delete"><i class="material-icons">delete</i></a>
+            {% endif %}
+          </div>
+          <p>
+            {{ theme.text }}
+          </p>
+        </article>
+      {% endfor %}
+    </section>
+    <ul class="pagination">
+      <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+      <li class="active"><a href="#!">1</a></li>
+      <li class="waves-effect"><a href="#!">2</a></li>
+      <li class="waves-effect"><a href="#!">3</a></li>
+      <li class="waves-effect"><a href="#!">4</a></li>
+      <li class="waves-effect"><a href="#!">5</a></li>
+      <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    </ul>
+  </section>
+</div>
+{% endblock %}

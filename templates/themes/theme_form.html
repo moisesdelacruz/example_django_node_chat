@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+  New Theme
+{% endblock %}
+
+{% block content %}
+<!-- <div class="username">
+  <span class="photo" style="background-image: url('https://lh3.googleusercontent.com/-Pl7iWsKpcQw/AAAAAAAAAAI/AAAAAAAAAAA/AMcAYi9h0H59W9r5fcvHFCsFx3zJcC0JHA/mo/photo.jpg?sz=46')"></span>
+  <span>moisesdelacruz</span>
+</div> -->
+<form class="form-theme" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <figure class="image data-theme">
+    <img src="http://placehold.it/400x300" width="400" height="300" />
+  </figure>
+  <div class="data-theme">
+    {% for field in form %}
+      {{ field.errors }}
+      {{ field }}
+    {% endfor %}
+    <!-- <input type="file" name="photo" accept="image/*"> -->
+    <button type="submit" class="btn btn-send">Save</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,188 @@
+// vars
+black = #222
+black_title = #5f5f5f
+black_text = #4c4c4c
+black_border = #cbcbcb
+gray = #9d9d9d
+blue = #4c8efa
+
+// imports
+@import "nib"
+@import "normalize.styl"
+@import "nav/mobile.styl"
+@import "theme/mobile.styl"
+@import "footer/mobile.styl"
+@import "description/mobile.styl"
+@import "new/mobile.styl"
+@import "card/main.styl"
+@import "paginate/main.styl"
+// utils
+@import "utils/box.styl"
+@import "utils/buttons.styl"
+@import "utils/forms.styl"
+
+// styles
+a
+  color blue
+  text-decoration none
+p
+  color black_text
+main.wrapper
+  margin-top 2em
+
+.wrapper
+  margin 0 auto
+  max-width 500px
+
+.login
+  margin 4em auto
+  max-width 420px
+
+.themes
+  margin 0 auto
+  column-count 1
+  column-gap 1.5em
+
+.title
+  color black_title
+  font-weight normal
+.border-right
+  border-right none
+.border-bottom
+  border-bottom 1px solid black_border
+.box-shadow
+  box-shadow black_border 0 1px 15px
+.center-text
+  text-align center
+.center
+  margin 1em auto
+.colum-2
+  margin 0 auto
+  max-width 500px
+  overflow hidden
+  width 100%
+.content-flex
+  padding .2em
+.float-right
+  float right
+.label
+  font-weight bold
+  display block
+  margin .5em 0
+  text-transform capitalize
+.border-dashed
+  border 2px dashed black_border
+.data
+  margin 2.5em
+.hide-mobile
+  display none
+.show-mobile
+  display flex
+.btn-menu
+  color white
+  font-size 2em
+  padding .3em .2em
+
+.separator
+  border-top 1px solid gray
+  margin 0 auto
+  width calc(100% - 1em)
+
+
+.username
+  color black_title
+  font-weight normal
+  display flex
+  list-style none
+  align-items center
+  span:last-child
+    margin-left .5em
+
+.header
+  display flex
+  justify-content space-between
+  margin .5em 0
+
+.photo
+  display flex
+  border-radius 50%
+  background-size cover
+  background-repeat no-repeat
+.photo-small
+  height 32px
+  width 32px
+.photo-median
+  width 150px
+  height 150px
+.photo-large
+  width 300px
+  height 300px
+
+.date
+  float right
+  font-weight bold
+  font-size 14px
+  color black_text
+
+@media only screen and (min-width: 400px)
+  .themes
+    column-count 2
+
+@media only screen and (min-width: 1000px)
+  .themes
+    column-count 4
+
+@media screen and (min-width:1024px)
+  nav
+    .Menu-right
+      display flex
+    .Menu-left > ul
+      display flex
+
+@media screen and (min-width:1000px)
+  .wrapper
+    margin 0 auto
+    max-width 1024px
+  .content-flex
+    display flex
+  .border-right
+    border-right 1px solid black_border
+  .border-bottom
+    border-bottom none
+  .hide-mobile
+    display block
+  .show-mobile
+    display none
+  .separator
+    display none
+  .Menu-mobile
+    position static
+    .item
+      padding 1px
+      overflow hidden
+      a
+        line-height .5em
+
+  .Description
+  .Comments
+    display inline-block
+
+  .Description
+    border-bottom none
+    border-right 1px solid black_border
+
+  .Comments
+    margin 1em auto
+  .comments-box
+    overflow-y scroll
+    height 500px
+
+  .form-theme
+    display flex
+
+  .data-theme
+    display inline-block
+    border-bottom none
+    width calc(50% - 1em)
+    &:first-child
+      border-right 1px solid black_border

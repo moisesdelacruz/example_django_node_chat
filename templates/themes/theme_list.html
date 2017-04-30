@@ -5,10 +5,28 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Themes</h1>
-  <ul>
-    {% for object in object_list %}
-      <li><a href="{% url 'themes:detail' object.pk %}">{{ object.text|truncatechars:30 }}</a></li>
-    {% endfor %}
-  </ul>
+<h1 class="title">Themes All</h1>
+<section class="themes">
+  {% for object in object_list %}
+    <article class="theme box-shadow">
+      <a href="{% url 'themes:detail' object.pk %}">
+        {% if object.photo %}
+          <img src="{{ object.photo.url }}" title="description" />
+        {% else %}
+          <img src="http://placehold.it/400x300" title="description" />
+        {% endif %}
+        {{ object.text|truncatechars:140 }}
+      </a>
+    </article>
+  {% endfor %}
+</section>
+<ul class="pagination">
+  <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+  <li class="active"><a href="#!">1</a></li>
+  <li class="waves-effect"><a href="#!">2</a></li>
+  <li class="waves-effect"><a href="#!">3</a></li>
+  <li class="waves-effect"><a href="#!">4</a></li>
+  <li class="waves-effect"><a href="#!">5</a></li>
+  <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+</ul>
 {% endblock %}

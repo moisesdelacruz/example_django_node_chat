@@ -1,0 +1,64 @@
+nav
+  background black
+  margin 0
+  padding .3em
+  border-bottom 1px solid black_border
+  box-shadow black_border 0 1px 15px
+  h1
+    font-size 18px
+    font-weight normal
+    margin 0
+    margin-right 1em
+    padding .8em 0
+    a
+      color gray
+      cursor pointer
+      text-decoration none
+      &:hover
+        color white
+
+.Menu-container
+  display flex
+  justify-content space-between
+
+  ul
+    margin 0
+    padding 0
+    align-items center
+    list-style none
+
+  .item > a
+      text-decoration none
+      color gray
+      cursor pointer
+      font-size 14px
+      padding .5em
+      &:hover
+        color white
+
+.Menu-left
+  display flex
+  align-items center
+  ul
+    display none
+
+.Menu-right
+  display none
+  .userItem > a
+    display flex
+    align-items center
+    span:first-child
+      margin-right .5em
+
+.Menu-mobile
+  background-color: black
+  position absolute
+  top 3.9em
+  right 0
+  text-align right
+  .item
+    padding .8em
+    overflow hidden
+    a
+      line-height .8em
+      width 100%

@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.sessions.models import Session
 from django.contrib.auth.decorators import login_required
 
+from datetime import datetime
 import redis
 import json
 
@@ -29,7 +30,11 @@ def node_api(request):
 
         #Once comment has been created post it to the chat channel
         r = redis.StrictRedis(host='localhost', port=6379, db=0)
-        r.publish('chat', json.dumps({'user': user.username, 'text': request.POST.get('comment')}))
+        r.publish('chat', json.dumps({
+            'user': user.username,
+            'text': request.POST.get('comment'),
+            'date': datetime.now().strftime('%b %d, %Y, %I:%M %p')
+        }))
 
         return HttpResponse("Everything worked :)")
     except Exception, e:
