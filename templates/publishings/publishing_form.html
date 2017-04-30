@@ -12,7 +12,11 @@
 <form class="form-theme" method="post" enctype="multipart/form-data">
   {% csrf_token %}
   <figure class="image data-theme">
-    <img src="http://placehold.it/400x300" width="400" height="300" />
+    {% if object.photo %}
+      <img src="{{ object.photo.url }}" alt="currently" width="420" />
+    {% else %}
+      <img src="http://placehold.it/400x300" alt="currently" width="420" height="480" />
+    {% endif %}
   </figure>
   <div class="data-theme">
     {% for field in form %}
@@ -20,7 +24,7 @@
       {{ field }}
     {% endfor %}
     <!-- <input type="file" name="photo" accept="image/*"> -->
-    <button type="submit" class="btn btn-send">Save</button>
+    <button type="submit" class="btn btn-send">Publish</button>
   </form>
 </div>
 {% endblock %}

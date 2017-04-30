@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Confirm delete
+{% endblock %}
+
+{% block content %}
+<div class="login">
+  <section class="Box">
+    <h2 class="title">Confirm Delete</h2>
+    <div class="box-content">
+      <form class="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>
+          {{ object.text }}
+        </p>
+        <button type="submit" class="btn btn-send">Delete Publishing</button>
+      </form>
+    </div>
+  </section>
+</div>
+{% endblock %}

@@ -54,8 +54,8 @@
           <div class="options">
             <a href="{% url 'publishings:detail' publishing.pk %}"><i class="material-icons">visibility</i></a>
             {% if request.user == object %}
-              <a href="#edit"><i class="material-icons">edit</i></a>
-              <a href="#delete"><i class="material-icons">delete</i></a>
+              <a href="{% url 'publishings:update' publishing.pk %}"><i class="material-icons">edit</i></a>
+              <a href="{% url 'publishings:delete' publishing.pk %}"><i class="material-icons">delete</i></a>
             {% endif %}
           </div>
           <p>

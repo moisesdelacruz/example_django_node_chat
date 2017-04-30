@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.urlresolvers import reverse_lazy
 # login required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -34,7 +34,24 @@ class PublishingCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse_lazy('publishings:detail', args=(self.object.pk,))
 
-class PublishingUpdateView(LoginRequiredMixin, UpdateView):
+class PublishingDetailView(LoginRequiredMixin, DetailView):
+    model = Publishing
+
+    def get_context_data(self, **kwargs):
+        context = super(PublishingDetailView, self).get_context_data(**kwargs)
+        context['comments'] = Comment.objects.filter(publishing=self.kwargs['pk'])[::-1]
+        return context
+
+# only user owner
+class OnlyOwnerMixin(LoginRequiredMixin):
+
+    def dispatch(self, request, *args, **kwargs):
+        publishing = get_object_or_404(self.model, pk=self.kwargs['pk'])
+        if not publishing.user.pk == request.user.pk:
+            return redirect(reverse_lazy('publishings:detail', args=(self.kwargs['pk'],)))
+        return super(OnlyOwnerMixin, self).dispatch(request, *args, **kwargs)
+
+class PublishingUpdateView(OnlyOwnerMixin, UpdateView):
     model = Publishing
     form_class = PublishingModelForm
 
@@ -49,10 +66,10 @@ class PublishingUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('publishings:detail', args=(self.object.pk,))
 
-class PublishingDetailView(LoginRequiredMixin, DetailView):
+
+# only user owner
+class PublishingDeleteView(OnlyOwnerMixin, DeleteView):
     model = Publishing
 
-    def get_context_data(self, **kwargs):
-        context = super(PublishingDetailView, self).get_context_data(**kwargs)
-        context['comments'] = Comment.objects.filter(publishing=self.kwargs['pk'])[::-1]
-        return context
+    def get_success_url(self):
+        return reverse_lazy('users:profile')
