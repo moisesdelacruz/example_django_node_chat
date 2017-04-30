@@ -9,7 +9,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 # models
 from users.models import User
-from themes.models import Theme
+from publishings.models import Publishing
 # forms
 from users.forms import UserCreateForm, UserUpdateForm
 
@@ -27,7 +27,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
-        context['themes'] = Theme.objects.filter(user=self.object.pk)
+        context['publishings'] = Publishing.objects.filter(user=self.object.pk)
         return context
 
 # user register
@@ -46,7 +46,7 @@ class ProfileTemplateView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ProfileTemplateView, self).get_context_data(**kwargs)
         context['object'] = self.model.objects.get(pk=self.request.user.pk)
-        context['themes'] = Theme.objects.filter(user=self.request.user.pk)
+        context['publishings'] = Publishing.objects.filter(user=self.request.user.pk)
         return context
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):

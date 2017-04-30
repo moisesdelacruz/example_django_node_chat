@@ -8,11 +8,11 @@ import uuid
 # Funciones:
 # funcion para almacenamiento de imagenes
 def content_file_name(instance, filename):
-    return '/'.join(['themes', datetime.now().strftime('%Y-%m-%d'), filename])
+    return '/'.join(['publishings', datetime.now().strftime('%Y-%m-%d'), filename])
 
 
 # Create your models here.
-class Theme(models.Model):
+class Publishing(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User)
     text = models.TextField(blank=True)

@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% block title %}
-  Themes
+  Publishings
 {% endblock %}
 
 {% block content %}
-<h1 class="title">Themes All</h1>
+<h1 class="title">Publishings All</h1>
 <section class="themes">
   {% for object in object_list %}
     <article class="theme box-shadow">
-      <a href="{% url 'themes:detail' object.pk %}">
+      <a href="{% url 'publishings:detail' object.pk %}">
         {% if object.photo %}
           <img src="{{ object.photo.url }}" title="description" />
         {% else %}

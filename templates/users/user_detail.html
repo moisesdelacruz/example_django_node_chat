@@ -47,19 +47,19 @@
     </div>
   </section>
   <section class="colum-2">
-    <h2 class="title center-text">Themes</h2>
+    <h2 class="title center-text">Publishings</h2>
     <section class="cards">
-      {% for theme in themes %}
+      {% for publishing in publishings %}
         <article class="card box-shadow">
           <div class="options">
-            <a href="{% url 'themes:detail' theme.pk %}"><i class="material-icons">visibility</i></a>
+            <a href="{% url 'publishings:detail' publishing.pk %}"><i class="material-icons">visibility</i></a>
             {% if request.user == object %}
               <a href="#edit"><i class="material-icons">edit</i></a>
               <a href="#delete"><i class="material-icons">delete</i></a>
             {% endif %}
           </div>
           <p>
-            {{ theme.text }}
+            {{ publishing.text }}
           </p>
         </article>
       {% endfor %}

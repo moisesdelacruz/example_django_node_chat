@@ -105,9 +105,9 @@ $(document).ready(() => {
 
   function send_message(event) {
     let msg = entry_el.val()
-    let theme = entry_el.data('id');
+    let publishing = entry_el.data('id');
     if(msg){
-       socket.emit('send_message', {'text': msg, 'theme': theme}, (data) => {
+       socket.emit('send_message', {'text': msg, 'publishing': publishing}, (data) => {
             console.log(data);
        });
        //Clear input value

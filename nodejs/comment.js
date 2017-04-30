@@ -35,14 +35,11 @@ io.sockets.on('connection', (socket) => {
 
     //Client is sending message through socket.io
     socket.on('send_message', (message) => {
-        console.log(message);
         values = querystring.stringify({
-            theme: message.theme,
+            publishing: message.publishing,
             comment: message.text,
             sessionid: socket.handshake.cookie['sessionid'],
         });
-
-        console.log(values);
 
         var options = {
             host: 'localhost',

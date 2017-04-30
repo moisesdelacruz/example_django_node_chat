@@ -14,7 +14,7 @@
     <nav>
       <div class="Menu-container wrapper">
         <div class="Menu-left">
-          <h1><a href="/">Discuss Themes</a></h1>
+          <h1><a href="/">Photopublishings v0.1.0</a></h1>
         </div>
 
         <div class="show-mobile float-right">
@@ -23,7 +23,7 @@
 
         <ul class="Menu-right Menu-mobile" id="menu">
           <li class="item"><a href="/">Home</a></li>
-          <li class="item"><a href="{% url 'themes:create' %}">New Theme</a></li>
+          <li class="item"><a href="{% url 'publishings:create' %}">New Publishing</a></li>
           <div class="separator"></div>
           {% if request.user.is_staff %}
             <li class="item"><a href="/admin">Panel Admin</a></li>

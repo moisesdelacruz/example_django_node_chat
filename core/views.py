@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from core.models import Comment
-from themes.models import Theme
+from publishings.models import Publishing
 from users.models import User
 
 from django.shortcuts import render
@@ -23,10 +23,10 @@ def node_api(request):
         user_id = session.get_decoded().get('_auth_user_id')
         user = User.objects.get(id=user_id)
 
-        theme = Theme.objects.filter(id=request.POST.get('theme')).first()
+        publishing = Publishing.objects.filter(id=request.POST.get('publishing')).first()
 
         #Create comment
-        Comment.objects.create(user=user, theme=theme, text=request.POST.get('comment'))
+        Comment.objects.create(user=user, publishing=publishing, text=request.POST.get('comment'))
 
         #Once comment has been created post it to the chat channel
         r = redis.StrictRedis(host='localhost', port=6379, db=0)
