@@ -97,16 +97,19 @@ $(document).ready(() => {
 
   entry_el.keypress((event) => {
     //When enter is pressed send input value to node server
-    if(event.keyCode != 13) return;
-    send_message(event);
+    if(event.keyCode === 13 && !event.shiftKey) {
+      event.preventDefault()
+      send_message(event);
+    }
   });
 
   btn_send.addEventListener("click", send_message, false);
 
   function send_message(event) {
+    let exp = /.\S/i
     let msg = entry_el.val()
     let publishing = entry_el.data('id');
-    if(msg){
+    if(exp.test(msg)){
        socket.emit('send_message', {'text': msg, 'publishing': publishing}, (data) => {
             console.log(data);
        });
@@ -116,9 +119,15 @@ $(document).ready(() => {
   }
 
   function receive_message(message) {
-    var regx = /\B@[a-z0-9_-]+/gi
+    let exp = {
+      http: /(\b(https?|ftps?|git):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
+      regx: /\B@[a-z0-9_-]+/gi,
+      blank: /\r?\n/g,
+    }
 
-    text = message.text.replace(regx, match => `<a href="/${match}">${match}</a>`)
+    text = message.text.replace(exp.regx, match => `<a href="/${match}">${match}</a>`)
+                      .replace(exp.http, '<a href="$1" target="_blank">$1</a>')
+                      .replace(exp.blank, '<br/>')
 
     $('#comments').prepend(`<article class="comment">
       <p class="username">
