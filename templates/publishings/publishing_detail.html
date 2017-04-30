@@ -116,12 +116,16 @@ $(document).ready(() => {
   }
 
   function receive_message(message) {
+    var regx = /\B@[a-z0-9_-]+/gi
+
+    text = message.text.replace(regx, match => `<a href="/${match}">${match}</a>`)
+
     $('#comments').prepend(`<article class="comment">
       <p class="username">
         <strong><a href="/@${message.user}">${message.user}</a></strong>
       </p>
       <p class="comment-text">
-        ${message.text}
+        ${text}
       </p>
       <p class="date comment-created">
         ${message.date}
