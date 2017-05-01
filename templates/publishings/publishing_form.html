@@ -5,23 +5,24 @@
 {% endblock %}
 
 {% block content %}
-<!-- <div class="username">
-  <span class="photo" style="background-image: url('https://lh3.googleusercontent.com/-Pl7iWsKpcQw/AAAAAAAAAAI/AAAAAAAAAAA/AMcAYi9h0H59W9r5fcvHFCsFx3zJcC0JHA/mo/photo.jpg?sz=46')"></span>
-  <span>moisesdelacruz</span>
-</div> -->
-<form class="form-theme" method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <figure class="image data-theme">
+<div class="content-flex box-shadow">
+  <figure class="image data-theme colum-2">
+    <figcaption class="float-right label">{{ object.created_at }}</figcaption>
     {% if object.photo %}
       <img src="{{ object.photo.url }}" alt="currently" width="420" />
     {% else %}
       <img src="http://placehold.it/400x300" alt="currently" width="420" height="480" />
     {% endif %}
   </figure>
-  <div class="data-theme">
+  <form class="form  colum-2" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
     {% for field in form %}
-      {{ field.errors }}
-      {{ field }}
+      <p>
+        {% for error in field.errors %}
+          <span class="error">{{ error }}</span>
+        {% endfor %}
+        {{ field }}
+      </p>
     {% endfor %}
     <!-- <input type="file" name="photo" accept="image/*"> -->
     <button type="submit" class="btn btn-send">Publish</button>
