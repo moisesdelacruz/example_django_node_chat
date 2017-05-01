@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ze@h+z8ixafva*et%q7e6=gf2cy58&i4(e+%ewj*#ikvra6czp'
+SECRET_KEY = os.getenv('PHOTOPUBLISHINGS_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'photopublishings.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('PHOTOPUBLISHINGS_DB_NAME'),
+        'USER': os.getenv('PHOTOPUBLISHINGS_DB_USER'),
+        'PASSWORD': os.getenv('PHOTOPUBLISHINGS_DB_PASSWORD'),
+        'HOST': os.getenv('PHOTOPUBLISHINGS_DB_HOST'),
+        'PORT': ''
     }
 }
 
