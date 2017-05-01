@@ -40,6 +40,7 @@
           </p>
         {% endfor %}
         <button type="submit" class="btn btn-send center">Save Changes</button>
+        <a href="{% url 'users:detail' object.username %}">Back to profile</a>
       </form>
     </div>
   </section>

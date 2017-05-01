@@ -28,7 +28,7 @@
         <span class="photo photo-median center" style="background-image: url({% static "image/profile.jpg" %})"></span>
       {% endif %}
       {% if request.user == object %}
-        <figcaption class="center-text"><a href="{% url 'users:profile_edit' %}">Edit Profile</a></figcaption>
+        <figcaption class="center-text"><a href="{% url 'users:profile_edit' request.user.username %}">Edit Profile</a></figcaption>
       {% endif %}
     </figure>
     <div class="data">

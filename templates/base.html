@@ -30,7 +30,7 @@
           {% endif %}
           <li class="item"><a href="{% url 'auth:logout' %}">Logout</a></li>
           <li class="item userItem">
-            <a href="/profile">
+            <a href="{% url 'users:detail' request.user.username %}">
               <span>{{ request.user.username }}</span>
               {% if request.user.photo %}
                 <span class="photo photo-small float-right" style="background-image: url({{ request.user.photo.url }})"></span>
