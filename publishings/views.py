@@ -17,7 +17,8 @@ from publishings.forms import PublishingModelForm
 
 class PublishingListView(LoginRequiredMixin, ListView):
     model = Publishing
-    paginate_by = 2
+    paginate_by = 16
+    ordering = '-created_at'
 
 class PublishingCreateView(LoginRequiredMixin, CreateView):
     model = Publishing

@@ -29,7 +29,7 @@ class UserDetailView(LoginRequiredMixin, ListView):
         context = super(UserDetailView, self).get_context_data(**kwargs)
         user = self.model.objects.get(username=self.kwargs['slug'])
 
-        query_result = Publishing.objects.filter(user=user)
+        query_result = Publishing.objects.filter(user=user).order_by('-created_at')
         # paginator
         paginator = Paginator(query_result, self.paginate_by)
         page = self.request.GET.get('page')
