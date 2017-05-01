@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse
+# django paginator
+from django.core.paginator import Paginator
+from django.core.paginator import EmptyPage
+from django.core.paginator import PageNotAnInteger
 # mixins
 from django.contrib.auth.mixins import LoginRequiredMixin
 # class based views
@@ -16,13 +20,28 @@ from users.forms import UserUpdateForm
 # Create your views here.
 
 # public profile
-class UserDetailView(LoginRequiredMixin, DetailView):
+class UserDetailView(LoginRequiredMixin, ListView):
     model = User
-    slug_field = 'username'
+    template_name = 'users/user_detail.html'
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
-        context['publishings'] = Publishing.objects.filter(user=self.object.pk)
+        user = self.model.objects.get(username=self.kwargs['slug'])
+
+        query_result = Publishing.objects.filter(user=user)
+        # paginator
+        paginator = Paginator(query_result, self.paginate_by)
+        page = self.request.GET.get('page')
+        try:
+            object_list = paginator.page(page)
+        except PageNotAnInteger:
+            object_list = paginator.page(1)
+        except EmptyPage:
+            object_list = paginator.page(paginator.num_pages)
+
+        context['publishings'] = object_list
+        context['object'] = user
         return context
 
 # private profile
