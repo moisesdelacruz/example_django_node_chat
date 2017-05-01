@@ -4,12 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node nodejs/comment.js"
+    "stylus": "stylus -c -u nib --include-css static/css/main.styl",
+    "stylus:watch": "stylus -c -w -u nib --include-css static/css/main.styl",
+    "build": "browserify static/js/app.js > static/js/build.js",
+    "build:watch": "watchify static/js/app.js -o static/js/bundle.js -v",
+    "server": "node nodejs/comment.js",
+    "start": "npm run stylus && npm run build"
   },
   "author": "moisesdelacruz",
   "license": "ISC",
+  "devDependencies": {
+    "browserify": "^14.3.0",
+    "nib": "^1.1.2",
+    "stylus": "^0.54.5",
+    "watchify": "^3.9.0"
+  },
   "dependencies": {
+    "normalize.styl": "^3.0.3",
     "cookie": "^0.3.1",
     "redis": "^2.7.1",
     "socket.io": "^1.7.3"
