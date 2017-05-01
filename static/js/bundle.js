@@ -23,6 +23,13 @@ $(function() {
       current_photo.style.backgroundImage = `url(${window.URL.createObjectURL(file)})`
     })
   }
+
+  if (input_image && current_photo) {
+    input_image.addEventListener('change', (event) => {
+      let file = event.target.files[0]
+      current_photo.src = `${window.URL.createObjectURL(file)}`
+    })
+  }
 });
 
 },{}]},{},[1]);

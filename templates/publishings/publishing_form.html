@@ -9,9 +9,9 @@
   <figure class="image data-theme colum-2">
     <figcaption class="float-right label">{{ object.created_at }}</figcaption>
     {% if object.photo %}
-      <img src="{{ object.photo.url }}" alt="currently" width="420" />
+      <img id="current_photo" src="{{ object.photo.url }}" alt="currently" width="420" />
     {% else %}
-      <img src="http://placehold.it/400x300" alt="currently" width="420" height="480" />
+      <img id="current_photo" src="http://placehold.it/400x300" alt="currently" width="420" height="480" />
     {% endif %}
   </figure>
   <form class="form  colum-2" method="post" enctype="multipart/form-data">
@@ -24,7 +24,6 @@
         {{ field }}
       </p>
     {% endfor %}
-    <!-- <input type="file" name="photo" accept="image/*"> -->
     <button type="submit" class="btn btn-send">Publish</button>
   </form>
 </div>
