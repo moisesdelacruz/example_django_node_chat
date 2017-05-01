@@ -17,7 +17,7 @@ class SignupView(View):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated():
             return super(SignupView, self).dispatch(request, *args, **kwargs)
-        return redirect(reverse_lazy('users:profile'))
+        return redirect(reverse_lazy('users:detail', args=(self.request.user.username,)))
 
     def get(self, request, *args, **kwargs):
         form = UserCreateForm()
@@ -39,7 +39,7 @@ class LoginView(View):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated():
             return super(LoginView, self).dispatch(request, *args, **kwargs)
-        return redirect(reverse_lazy('users:profile'))
+        return redirect(reverse_lazy('users:detail', args=(self.request.user.username,)))
 
     def get(self, request, *args, **kwargs):
         form = AuthenticationForm()
