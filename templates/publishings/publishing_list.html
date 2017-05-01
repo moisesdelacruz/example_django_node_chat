@@ -20,13 +20,44 @@
     </article>
   {% endfor %}
 </section>
-<ul class="pagination">
-  <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-  <li class="active"><a href="#!">1</a></li>
-  <li class="waves-effect"><a href="#!">2</a></li>
-  <li class="waves-effect"><a href="#!">3</a></li>
-  <li class="waves-effect"><a href="#!">4</a></li>
-  <li class="waves-effect"><a href="#!">5</a></li>
-  <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-</ul>
+
+{% if is_paginated %}
+<nav class="pagination">
+  <ul class="list">
+    {% if page_obj.has_previous %}
+      <li class="button">
+        <a href="?page={{ page_obj.previous_page_number }}">
+          <span><</span>
+        </a>
+      </li>
+    {% else %}
+      <li class="disabled button">
+        <a href="#">
+          <span><</span>
+        </a>
+      </li>
+    {% endif %}
+
+    {% for page in paginator.page_range %}
+      <li {% if page == page_obj.number %}class="active"{% endif %}>
+        <a href="?page={{ page }}">{{ page }}</a>
+      </li>
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li class="button">
+        <a href="?page={{ page_obj.next_page_number }}">
+          <span>></span>
+        </a>
+      </li>
+    {% else %}
+      <li {% if not page_obj.has_next %}class="disabled button"{% endif %}>
+        <a href="#">
+          <span>></span>
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
 {% endblock %}
