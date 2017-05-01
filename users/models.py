@@ -96,11 +96,10 @@ class User(AbstractUser):
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'
 
-    # def save(self, *args, **kwargs):
-    #     try:
-    #         model = User.objects.get(id=self.id)
-    #         if self.photo:
-    #             print self.photo
-    #             model.photo.delete()
-    #     except: pass
-    #     return super(User, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        try:
+            model = User.objects.get(id=self.id)
+            if self.photo != model.photo:
+                model.photo.delete()
+        except: pass
+        return super(User, self).save(*args, **kwargs)

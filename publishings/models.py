@@ -23,3 +23,11 @@ class Publishing(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def save(self, *args, **kwargs):
+        try:
+            model = Publishing.objects.get(id=self.id)
+            if self.photo != model.photo:
+                model.photo.delete()
+        except: pass
+        return super(Publishing, self).save(*args, **kwargs)
