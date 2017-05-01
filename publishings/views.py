@@ -36,19 +36,23 @@ class PublishingCreateView(LoginRequiredMixin, CreateView):
 
 class PublishingDetailView(LoginRequiredMixin, DetailView):
     model = Publishing
+    slug_url_kwarg = 'uuid'
+    slug_field = 'id'
 
     def get_context_data(self, **kwargs):
         context = super(PublishingDetailView, self).get_context_data(**kwargs)
-        context['comments'] = Comment.objects.filter(publishing=self.kwargs['pk'])[::-1]
+        context['comments'] = Comment.objects.filter(publishing=self.kwargs['uuid'])[::-1]
         return context
 
 # only user owner
 class OnlyOwnerMixin(LoginRequiredMixin):
+    slug_url_kwarg = 'uuid'
+    slug_field = 'id'
 
     def dispatch(self, request, *args, **kwargs):
-        publishing = get_object_or_404(self.model, pk=self.kwargs['pk'])
+        publishing = get_object_or_404(self.model, pk=self.kwargs['uuid'])
         if not publishing.user.pk == request.user.pk:
-            return redirect(reverse_lazy('publishings:detail', args=(self.kwargs['pk'],)))
+            return redirect(reverse_lazy('publishings:detail', args=(self.kwargs['uuid'],)))
         return super(OnlyOwnerMixin, self).dispatch(request, *args, **kwargs)
 
 class PublishingUpdateView(OnlyOwnerMixin, UpdateView):
