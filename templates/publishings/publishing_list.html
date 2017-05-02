@@ -6,9 +6,9 @@
 
 {% block content %}
 <h1 class="title">Publishings All</h1>
-<section class="themes">
+<section class="publishings">
   {% for object in object_list %}
-    <article class="theme box-shadow">
+    <article class="publishing box-shadow">
       <a href="{% url 'publishings:detail' object.pk %}">
         {% if object.photo %}
           <img src="{{ object.photo.url }}" title="description" />

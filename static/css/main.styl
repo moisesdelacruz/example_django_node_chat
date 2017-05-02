@@ -10,7 +10,7 @@ blue = #4c8efa
 @import "nib"
 @import "normalize.styl"
 @import "nav/mobile.styl"
-@import "theme/mobile.styl"
+@import "publishing/mobile.styl"
 @import "footer/mobile.styl"
 @import "description/mobile.styl"
 @import "new/mobile.styl"
@@ -40,7 +40,7 @@ main.wrapper
   margin 4em auto
   max-width 420px
 
-.themes
+.publishings
   margin 0 auto
   column-count 1
   column-gap 1.5em
@@ -136,7 +136,7 @@ main.wrapper
   color black_text
 
 @media only screen and (min-width: 400px)
-  .themes
+  .publishings
     column-count 2
 
 @media only screen and (min-width:1024px)
@@ -145,7 +145,7 @@ main.wrapper
       display flex
 
 @media only screen and (min-width:1000px)
-  .themes
+  .publishings
     column-count 4
   .wrapper
     margin 0 auto
@@ -190,10 +190,10 @@ main.wrapper
     overflow-y scroll
     height 500px
 
-  .form-theme
+  .form-publishing
     display flex
 
-  .data-theme
+  .data-publishing
     display inline-block
     border-bottom none
     width calc(50% - 1em)
