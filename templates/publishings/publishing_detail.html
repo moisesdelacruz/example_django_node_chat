@@ -72,6 +72,10 @@
 {% block javascript %}
 <script src="http://localhost:3000/socket.io/socket.io.js"></script>
 <script>
+function myFunction() {
+    document.getElementById("dropdown").classList.toggle("show");
+};
+
 $(document).ready(() => {
 
   const socket = io.connect('localhost:3000');
