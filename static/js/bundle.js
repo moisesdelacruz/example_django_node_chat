@@ -6,6 +6,21 @@ $(function() {
     $('#menu').slideToggle();
   });
 
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = (event) => {
+    if (!event.target.matches('.dropbtn') && !event.target.matches('.dropbtn span')) {
+
+      var dropdowns = document.getElementsByClassName("user-drowdown");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+
   // Profile Edit
   const input_image = document.getElementById('id_photo');
   const btn_change_image = document.getElementById('btn_change_image');

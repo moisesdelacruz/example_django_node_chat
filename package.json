@@ -6,7 +6,7 @@
   "scripts": {
     "stylus": "stylus -c -u nib --include-css static/css/main.styl",
     "stylus:watch": "stylus -c -w -u nib --include-css static/css/main.styl",
-    "build": "browserify static/js/app.js > static/js/build.js",
+    "build": "browserify static/js/app.js > static/js/bundle.js",
     "build:watch": "watchify static/js/app.js -o static/js/bundle.js -v",
     "server": "node nodejs/comment.js",
     "start": "npm run stylus && npm run build"

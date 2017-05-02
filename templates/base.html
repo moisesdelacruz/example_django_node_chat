@@ -14,7 +14,7 @@
       <a href="#show-menu" id="btn-menu"><i class="material-icons btn-menu">menu</i></a>
     </div>
 
-    <ul class="Menu-right Menu-mobile" id="menu">
+    <ul class="Menu-right Menu-mobile nav" id="menu">
       <li class="item"><a href="/">Home</a></li>
       <li class="item"><a href="{% url 'publishings:create' %}">New Publishing</a></li>
       <div class="separator"></div>
@@ -23,7 +23,7 @@
       {% endif %}
       <li class="item"><a href="{% url 'auth:logout' %}">Logout</a></li>
       <li class="item userItem">
-        <a href="{% url 'users:detail' request.user.username %}">
+        <a href="#" class="dropbtn" onclick="myFunction()">
           <span>{{ request.user.username }}</span>
           {% if request.user.photo %}
             <span class="photo photo-small float-right" style="background-image: url({{ request.user.photo.url }})"></span>
@@ -31,6 +31,15 @@
             <span class="photo photo-small float-right" style="background-image: url({% static "image/profile.jpg" %})"></span>
           {% endif %}
         </a>
+        <ul id="dropdown" class="user-drowdown">
+          <li><a href="{% url 'users:detail' request.user.username %}"><i class="material-icons">perm_identity</i><span>Profile</span></a></li>
+          <li><a href="{% url 'publishings:create' %}"><i class="material-icons">assignment</i><span>New publishing</span></a></li>
+          <li><a href="{% url 'users:profile_edit' request.user.username %}"><i class="material-icons">settings</i><span>Edit profile</span></a></li>
+          {% if request.user.is_staff %}
+            <li><a href="/admin"><i class="material-icons">supervisor_account</i><span>Panel admin</span></a></li>
+          {% endif %}
+          <li><a href="{% url 'auth:logout' %}"><i class="material-icons">power_settings_new</i><span>Logout</span></a></li>
+        </ul>
       </li>
     </ul>
   </div>
@@ -42,4 +51,12 @@
 
   {% endblock %}
 </main>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+    function myFunction() {
+        document.getElementById("dropdown").classList.toggle("show");
+    };
+  </script>
 {% endblock %}
