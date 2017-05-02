@@ -6,15 +6,19 @@
 <!-- nav bar -->
 <nav>
   <div class="Menu-container wrapper">
-    <div class="Menu-left">
+    <div class="Logo-content">
       <h1><a href="/">Photopublishings v0.1.0</a></h1>
     </div>
 
     <div class="show-mobile float-right">
-      <a href="#show-menu" id="btn-menu"><i class="material-icons btn-menu">menu</i></a>
+      <div class="iconMenu" id="btn-menu">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
     </div>
 
-    <ul class="Menu-right Menu-mobile nav" id="menu">
+    <ul class="Menu" id="menu">
       <li class="item"><a href="/">Home</a></li>
       <li class="item"><a href="{% url 'publishings:create' %}">New Publishing</a></li>
       <div class="separator"></div>
@@ -23,7 +27,7 @@
       {% endif %}
       <li class="item"><a href="{% url 'auth:logout' %}">Logout</a></li>
       <li class="item userItem">
-        <a href="#" class="dropbtn" onclick="myFunction()">
+        <a href="#" class="dropbtn" id="btn-dropdown">
           <span>{{ request.user.username }}</span>
           {% if request.user.photo %}
             <span class="photo photo-small float-right" style="background-image: url({{ request.user.photo.url }})"></span>
@@ -54,9 +58,6 @@
 {% endblock %}
 
 {% block javascript %}
-  <script type="text/javascript">
-    function myFunction() {
-        document.getElementById("dropdown").classList.toggle("show");
-    };
-  </script>
+  <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="{% static "js/bundle.js" %}"></script>
 {% endblock %}

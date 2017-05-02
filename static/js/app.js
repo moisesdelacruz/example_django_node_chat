@@ -1,47 +1,5 @@
-$(function() {
-  // Menu
-  $('#btn-menu').on('click', (e) => {
-    e.stopPropagation();
-    $('#menu').slideToggle();
-  });
-
-  // Close the dropdown menu if the user clicks outside of it
-  window.onclick = (event) => {
-    if (!event.target.matches('.dropbtn') && !event.target.matches('.dropbtn span')) {
-
-      var dropdowns = document.getElementsByClassName("user-drowdown");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
-      }
-    }
-  }
-
-  // Profile Edit
-  const input_image = document.getElementById('id_photo');
-  const btn_change_image = document.getElementById('btn_change_image');
-  const current_photo = document.getElementById('current_photo');
-
-  if (btn_change_image && input_image) {
-    btn_change_image.addEventListener('click', (event) => {
-      event.preventDefault()
-      input_image.accept = 'image/*'
-      input_image.click()
-    })
-
-    input_image.addEventListener('change', (event) => {
-      let file = event.target.files[0]
-      current_photo.style.backgroundImage = `url(${window.URL.createObjectURL(file)})`
-    })
-  }
-
-  if (input_image && current_photo) {
-    input_image.addEventListener('change', (event) => {
-      let file = event.target.files[0]
-      current_photo.src = `${window.URL.createObjectURL(file)}`
-    })
-  }
+document.addEventListener("DOMContentLoaded", (event) => { 
+  require('./actions/events.js')
+  require('./actions/change_photo.js')
+  require('./comments/index.js')
 });

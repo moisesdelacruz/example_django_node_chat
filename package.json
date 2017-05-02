@@ -20,8 +20,8 @@
     "watchify": "^3.9.0"
   },
   "dependencies": {
-    "normalize.styl": "^3.0.3",
     "cookie": "^0.3.1",
+    "normalize.styl": "^3.0.3",
     "redis": "^2.7.1",
     "socket.io": "^1.7.3"
   }
