@@ -34,6 +34,7 @@ main.wrapper
 .wrapper
   margin 0 auto
   max-width 500px
+  position relative
 
 .login
   margin 4em auto
@@ -138,18 +139,14 @@ main.wrapper
   .themes
     column-count 2
 
-@media only screen and (min-width: 1000px)
+@media only screen and (min-width:1024px)
+  nav
+    .Menu
+      display flex
+
+@media only screen and (min-width:1000px)
   .themes
     column-count 4
-
-@media screen and (min-width:1024px)
-  nav
-    .Menu-right
-      display flex
-    .Menu-left > ul
-      display flex
-
-@media screen and (min-width:1000px)
   .wrapper
     margin 0 auto
     max-width 1024px
@@ -165,13 +162,17 @@ main.wrapper
     display none
   .separator
     display none
-  .Menu-mobile
+  .Menu
     position static
+    padding 0
     .item
-      padding 1px
       overflow hidden
-      a
-        line-height .5em
+      & > a
+        font-size 14px
+        padding .8em .5em
+    .userItem
+      span:last-child
+        display block
 
   .Description
     padding .4em

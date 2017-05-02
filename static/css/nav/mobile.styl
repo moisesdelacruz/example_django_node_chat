@@ -20,48 +20,68 @@ nav
 .Menu-container
   display flex
   justify-content space-between
+  z-index 2
 
-  ul.nav
-    margin 0
-    padding 0
-    align-items center
-    list-style none
+.Menu
+  display none
+  margin 0
+  padding 0
+  align-items center
+  list-style none
+  position absolute
+  top 3.4em
+  right 0
+  background-color black
+  padding 1em
+  border-radius 3px
 
   .item > a
-      text-decoration none
-      color gray
-      cursor pointer
-      font-size 14px
-      padding .5em
-      &:hover
-        color white
+    text-decoration none
+    color gray
+    cursor pointer
+    font-size 16px
+    padding .8em .5em
+    display block
+    text-align right
+    &:hover
+      color white
+  .userItem
+    line-height 2
+    span:first-child
+      margin 0 .5em
+    span:last-child
+      display none
 
-.Menu-left
+.Logo-content
   display flex
   align-items center
   ul
     display none
 
-.Menu-right
-  display none
-  .userItem > a
-    display flex
-    align-items center
-    span:first-child
-      margin-right .5em
+// icon menu
+.iconMenu
+  display inline-block
+  cursor pointer
+  margin auto .5em
 
-.Menu-mobile
-  background-color: black
-  position absolute
-  top 3.9em
-  right 0
-  text-align right
-  .item
-    padding .8em
-    overflow hidden
-    a
-      line-height .8em
-      width 100%
+.bar1, .bar2, .bar3
+  background-color white
+  border-radius 2px
+  height 5px
+  margin 6px 0
+  transition 0.4s
+  width 35px
+
+.change .bar1
+  -webkit-transform rotate(-45deg) translate(-9px, 6px)
+  transform rotate(-45deg) translate(-9px, 6px)
+
+.change .bar2
+  opacity 0
+
+.change .bar3
+  -webkit-transform rotate(45deg) translate(-8px, -8px)
+  transform rotate(45deg) translate(-8px, -8px)
 
 .user-drowdown
   background white
@@ -71,6 +91,9 @@ nav
   position absolute
   padding .5em
   list-style none
+  // top 4em
+  right 0
+  z-index 1
   li
     padding .3em .5em
     text-align left
