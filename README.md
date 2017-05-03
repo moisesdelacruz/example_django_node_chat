@@ -5,7 +5,7 @@
 
 ## Install
 ```sh
-  git clone https://github.com/moisesdelacruz/example_django_node_chat.git
+  git clone https://github.com/moisesdelacruz/photopublishings.git
 
   cd example_django_node_chat/
 
