@@ -8,7 +8,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # models
 from publishings.models import Publishing
-from core.models import Comment
+from comments.models import Comment
 from users.models import User
 # forms
 from publishings.forms import PublishingModelForm

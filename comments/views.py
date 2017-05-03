@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from core.models import Comment
+from comments.models import Comment
 from publishings.models import Publishing
 from users.models import User
 

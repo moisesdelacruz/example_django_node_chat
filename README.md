@@ -1,4 +1,7 @@
-# Example: comments real time with django and nodejs.
+# Photopublishings
+### It's a application for publishings photos more a description.
+### Builded in Django and Nodejs.
+### It has Unit Tests on Django.
 
 ## Install
 ```sh
@@ -14,7 +17,7 @@
 
 ## Config entorno variables
 ```sh
-  export PHOTOPUBLISHINGS_SECRET_KEY="ze@h+z8ixafva*et%q7e6=gf2cy58&i4(e+%ewj*#ikvra6czp"
+  export PHOTOPUBLISHINGS_SECRET_KEY="-c77ykal!%=0nbr#8po380!j@0)sonvk_)7)ajtog84bmwwb!p"
   export PHOTOPUBLISHINGS_DB_NAME="<name databases>"
   export PHOTOPUBLISHINGS_DB_USER="<username of postgres>"
   export PHOTOPUBLISHINGS_DB_PASSWORD="<possword of postgres user>"
@@ -27,6 +30,8 @@
 ## Run servers
 ```sh
   python manage.py migrate
+
+  python manage.py test
 
   python manage.py createsuperuser
 

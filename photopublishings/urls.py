@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('publishings.urls', namespace='publishings')),
     url(r'^', include('users.urls', namespace='users')),
-    url(r'^', include('core.urls', namespace='core')),
+    url(r'^', include('comments.urls', namespace='comments')),
     url(r'^', include('auth.urls', namespace='auth')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
