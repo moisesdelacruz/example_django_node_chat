@@ -3,7 +3,7 @@ const input_comment = document.getElementById('comment')
 const btn_send = document.getElementById('btn_send')
 
 // connect to socket.io
-const socket = io.connect('localhost:3000');
+const socket = io.connect('http://173.214.160.232:4000/');
 // events
 socket.on('connect', () => {
   console.log("connect");
