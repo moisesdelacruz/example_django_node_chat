@@ -21,26 +21,21 @@ from users.forms import UserUpdateForm
 
 # public profile
 class UserDetailView(LoginRequiredMixin, ListView):
-    model = User
+    model = Publishing
     template_name = 'users/user_detail.html'
     paginate_by = 5
 
+    def get_queryset(self):
+        # original qs
+        qs = super(UserDetailView, self).get_queryset()
+        # filter by a variable captured from url, for example
+        return qs.filter(user__username=self.kwargs['slug'])
+
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
-        user = self.model.objects.get(username=self.kwargs['slug'])
+        user = User.objects.get(username=self.kwargs['slug'])
 
-        query_result = Publishing.objects.filter(user=user).order_by('-created_at')
-        # paginator
-        paginator = Paginator(query_result, self.paginate_by)
-        page = self.request.GET.get('page')
-        try:
-            object_list = paginator.page(page)
-        except PageNotAnInteger:
-            object_list = paginator.page(1)
-        except EmptyPage:
-            object_list = paginator.page(paginator.num_pages)
-
-        context['publishings'] = object_list
+        context['publishings'] = context['object_list']
         context['object'] = user
         return context
 
