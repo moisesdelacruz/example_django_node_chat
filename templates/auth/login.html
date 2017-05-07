@@ -12,8 +12,17 @@
     <div class="box-content">
       <form class="form" method="post">
         {% csrf_token %}
-        <input type="text" autofocus name="username" placeholder="Username" />
-        <input type="password" name="password" placeholder="Password" />
+        {% for field in form %}
+          {{ field }}
+          {{ field.errors }}
+        {% endfor %}
+        {% if form.non_field_errors %}
+            <ul class="form-errors">
+                {% for error in form.non_field_errors %}
+                    <li class="error">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <button type="submit" class="btn btn-send">Login</button>
         <p>
           if not has a account, <a href="{% url 'auth:signup' %}">sign up</a>
