@@ -29,7 +29,7 @@ def node_api(request):
         Comment.objects.create(user=user, publishing=publishing, text=request.POST.get('comment'))
 
         #Once comment has been created post it to the chat channel
-        r = redis.StrictRedis(host='localhost', port=6379, db=0)
+        r = redis.StrictRedis(host='redis', port=6379, db=0)
         r.publish('chat', json.dumps({
             'user': user.username,
             'text': request.POST.get('comment'),
@@ -37,5 +37,5 @@ def node_api(request):
         }))
 
         return HttpResponse("Everything worked :)")
-    except Exception, e:
+    except Exception as e:
         return HttpResponseServerError(str(e))

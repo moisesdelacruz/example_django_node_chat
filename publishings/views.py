@@ -25,7 +25,6 @@ class PublishingCreateView(LoginRequiredMixin, CreateView):
     form_class = PublishingModelForm
 
     def form_valid(self, form):
-        print form
         user = User.objects.get(id=self.request.user.id)
         # format form
         __object = form.save(commit=False)

@@ -12,6 +12,7 @@ from auth.forms import AuthForm
 
 # Create your views here.
 
+
 # Sign up
 class SignupView(FormView):
     extra_context = None
@@ -22,7 +23,8 @@ class SignupView(FormView):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated():
             return super(SignupView, self).dispatch(request, *args, **kwargs)
-        return redirect(reverse_lazy('users:detail', args=(self.request.user.username,)))
+        return redirect(reverse_lazy('users:detail',
+                        args=(self.request.user.username,)))
 
     def form_valid(self, form):
         form.save()
@@ -43,7 +45,8 @@ class LoginView(FormView):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated():
             return super(LoginView, self).dispatch(request, *args, **kwargs)
-        return redirect(reverse_lazy('users:detail', args=(self.request.user.username,)))
+        return redirect(
+            reverse_lazy('users:detail', args=(self.request.user.username,)))
 
     def form_valid(self, form):
         username = self.request.POST['username']
@@ -56,13 +59,14 @@ class LoginView(FormView):
                 # redirect
                 url_next = self.request.GET.get('next')
                 if url_next is not None:
-					return redirect(url_next)
+                    return redirect(url_next)
                 else:
-					return super(LoginView, self).form_valid(form)
+                    return super(LoginView, self).form_valid(form)
             else:
                 return HttpResponse("Inactive user.")
         else:
             return super(LoginView, self).form_valid(form)
+
 
 # Logout
 class LogoutView(LoginRequiredMixin, View):
