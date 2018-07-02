@@ -3,41 +3,52 @@
 ### Builded in Django and Nodejs.
 ### It has Unit Tests on Django.
 
-## Install
+## Install Node server
+```sh
+git clone https://github.com/moisesdelacruz/photopublishings_node.git
+
+cd photopublishings_node/
+
+docker build -t moisesdelacruz/photopublishings .
+```
+
+## Install Django server
 ```sh
   git clone https://github.com/moisesdelacruz/photopublishings.git
 
-  cd example_django_node_chat/
+  cd photopublishings/
 
-  pip install -r requirements.txt
+  touch .env
+```
+* `.env` file content
+```sh
+SECRET_KEY=-c77ykal!%=0nbr#8po380!j@0)sonvk_)7)ajtog84bmwwb!p
 
-  npm install
-
+# Data Base Postgres
+POSTGRES_DB=photo
+POSTGRES_USER=photo_user
+POSTGRES_PASSWORD=photo_password
+```
+* build project
+```sh
+docker-compose build
+```
+* Run project
+```sh
+$ docker-compose up
+# migrate
+$ docker-compose run web python manage.py migrate
+# create superuser
+$ docker-compose run web python manage.py createsuperuser
 ```
 
-## Config entorno variables
+## Extra commands
 ```sh
-  export PHOTOPUBLISHINGS_SECRET_KEY="-c77ykal!%=0nbr#8po380!j@0)sonvk_)7)ajtog84bmwwb!p"
-  export PHOTOPUBLISHINGS_DB_NAME="<name databases>"
-  export PHOTOPUBLISHINGS_DB_USER="<username of postgres>"
-  export PHOTOPUBLISHINGS_DB_PASSWORD="<possword of postgres user>"
-  export PHOTOPUBLISHINGS_DB_HOST="localhost"
-```
+$ docker-compose run web python manage.py makemigrations
 
-## Additional
-- Install and run redis server
+$ docker-compose run web python manage.py migrate
 
-## Run servers
-```sh
-  python manage.py migrate
+$ docker-compose run web python manage.py shell
 
-  python manage.py test
-
-  python manage.py createsuperuser
-
-  python manage.py runserver
-
-  npm start
-
-  npm run server
+$ docker-compose run web python manage.py createsuperuser
 ```
